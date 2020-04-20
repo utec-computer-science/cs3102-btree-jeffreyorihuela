@@ -107,9 +107,9 @@ public:
         std::copy_n(node_in_overflow->data.begin(), half, child_one->data.begin());
         child_one->count = half;
         ptr->insert_in_node(pos, node_in_overflow->data[half]);
-        std::copy_n(node_in_overflow->children.begin() + half + 1, half, child_two->children.begin());
-        std::copy_n(node_in_overflow->data.begin() + half + 1, half - 1, child_two->data.begin());
-        child_two->count = half - 1;
+        std::copy_n(node_in_overflow->children.begin() + half + 1, BTREE_ORDER - half + 1, child_two->children.begin());
+        std::copy_n(node_in_overflow->data.begin() + half + 1, BTREE_ORDER - half, child_two->data.begin());
+        child_two->count = BTREE_ORDER - half;
         ptr->children[pos] = child_one;
         ptr->children[pos + 1] = child_two;
     }
@@ -125,9 +125,9 @@ public:
         child_one->count = half;
         ptr->count = 0;
         ptr->insert_in_node(0, node_in_overflow->data[half]);
-        std::copy_n(node_in_overflow->children.begin() + half + 1, half, child_two->children.begin());
-        std::copy_n(node_in_overflow->data.begin() + half + 1, half - 1, child_two->data.begin());
-        child_two->count = half - 1;
+        std::copy_n(node_in_overflow->children.begin() + half + 1, BTREE_ORDER - half + 1, child_two->children.begin());
+        std::copy_n(node_in_overflow->data.begin() + half + 1 , BTREE_ORDER - half, child_two->data.begin());
+        child_two->count = BTREE_ORDER - half;
         ptr->children[0] = child_one;
         ptr->children[1] = child_two;
     }
